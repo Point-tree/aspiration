@@ -42,7 +42,30 @@
 
 <script>
 export default {
-  name: 'select-school'
+  name: 'select-school',
+  params: {
+    site
+  },
+  data() {
+    return{
+      res: {}
+    }
+  },
+  mounted () {
+    this.getSchool();
+  },
+  methods: {
+    getSchool(){
+      this.axios.get('/products',{
+        params:{
+          categoryId:100012,
+          pageSize:14
+        }
+      }).then((res)=>{
+        this.res = res
+      })  
+    }
+  }
 }
 </script>
 

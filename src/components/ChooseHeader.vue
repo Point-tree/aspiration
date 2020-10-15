@@ -23,7 +23,7 @@
               </select>
             </div>
             <div class="select_scole">
-              <input type="text" :placeholder="tip">
+              <input type="text" :placeholder="tip" v-model="site">
             </div>
             <button class="submit">预测</button>
           </form>
@@ -58,7 +58,7 @@
           <div class="close_detail" @click="show()">
             {{showCondition}}
           </div>
-          <select-school v-if="result"></select-school>
+          <select-school v-if="result" :site="site"></select-school>
           <no-found v-if="!result"></no-found>
         </div>
         <div class="message_right">
@@ -109,7 +109,8 @@ export default {
       schoolList: [1,1,1,1,1,1,1,1,1],
       page: 'score',
       showRule: false,
-      tip: '高考分：550'
+      tip: '高考分：550',
+      site: ''
     }
   },
   methods: {
