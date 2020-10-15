@@ -1,7 +1,7 @@
 <template>
   <div class="select_school">
     <div class="result_num">
-      <span>共匹配</span><span class="strong">0</span><span>所学校，共</span><span class="strong">0</span><span>页</span>
+      <span>共匹配</span><span class="strong">{{baodi.length+wentuo.length+chongci.length}}</span><span>所学校，共</span><span class="strong">0</span><span>页</span>
     </div>
     <div class="result_table">
       <div class="table_title">
@@ -13,18 +13,64 @@
         <div class="some_major">部分开设专业</div>
         <div class="school_compoment">高校对比</div>
       </div>
-      <div class="table_msg">
+      <div class="table_msg" v-for="item1 of chongci" :key="item1.id" v-show="chongci">
         <div class="school_name">
           <img src="https://static-data.eol.cn/upload/logo/303.jpg" alt="广州体育学院">
           <span class="school">
-            <span class="name">广州体育学院</span>
+            <span class="name">{{item1.name}}</span>
             <span class="type">体育类</span>
           </span>
         </div>
-        <div class="low_price"><div class="type">理科</div><div class="score">200</div></div>
+        <div class="low_price"><div class="type">{{item1.sort}}</div><div class="score">{{item1.lowestmark}}</div></div>
         <div class="admission_batch">本科二批</div>
         <div class="school_type">普通类</div>
         <div class="admission_probability">冲刺</div>
+        <div class="some_major">
+          <ul>
+            <li>体育教育</li>
+            <li>运动人体科学</li>
+            <li>运动训练</li>
+          </ul>
+        </div>
+        <div class="school_compoment">
+          <span>+对比</span>
+        </div>
+      </div>
+      <div class="table_msg" v-for="item2 of wentuo" :key="item2.id" v-show="wentuo">
+        <div class="school_name">
+          <img src="https://static-data.eol.cn/upload/logo/303.jpg" alt="广州体育学院">
+          <span class="school">
+            <span class="name">{{item2.name}}</span>
+            <span class="type">体育类</span>
+          </span>
+        </div>
+        <div class="low_price"><div class="type">{{item2.sort}}</div><div class="score">{{item2.lowestmark}}</div></div>
+        <div class="admission_batch">本科二批</div>
+        <div class="school_type">普通类</div>
+        <div class="admission_probability">稳妥</div>
+        <div class="some_major">
+          <ul>
+            <li>体育教育</li>
+            <li>运动人体科学</li>
+            <li>运动训练</li>
+          </ul>
+        </div>
+        <div class="school_compoment">
+          <span>+对比</span>
+        </div>
+      </div>
+      <div class="table_msg" v-for="item3 of baodi" :key="item3.id" v-show="baodi">
+        <div class="school_name">
+          <img src="https://static-data.eol.cn/upload/logo/303.jpg" alt="广州体育学院">
+          <span class="school">
+            <span class="name">{{item3.name}}</span>
+            <span class="type">体育类</span>
+          </span>
+        </div>
+        <div class="low_price"><div class="type">{{item3.sort}}</div><div class="score">{{item3.lowestmark}}</div></div>
+        <div class="admission_batch">本科二批</div>
+        <div class="school_type">普通类</div>
+        <div class="admission_probability">保底</div>
         <div class="some_major">
           <ul>
             <li>体育教育</li>
@@ -43,12 +89,12 @@
 <script>
 export default {
   name: 'select-school',
-  params: {
-    site
-  },
   data() {
     return{
-      res: {}
+      res: {},
+      baodi: [],
+      chongci: [],
+      wentuo: []
     }
   },
   mounted () {
@@ -56,13 +102,16 @@ export default {
   },
   methods: {
     getSchool(){
-      this.axios.get('/products',{
-        params:{
-          categoryId:100012,
-          pageSize:14
+      this.axios.get('/Aspiration_war_exploded/school/predictSchoolAll',{
+        params: {
+          rank: 6000,
+          sort: '理科'
         }
       }).then((res)=>{
-        this.res = res
+        this.res = res.data
+        this.baodi = res.data.baodi
+        this.chongci = res.data.chongci
+        this.wentuo = res.data.wentuo
       })  
     }
   }
