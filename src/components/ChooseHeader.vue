@@ -23,14 +23,17 @@
               </select>
             </div>
             <div class="select_scole">
-              <input type="text" :placeholder="tip" v-model="site">
+              <input type="text" :placeholder="tip" v-model="rank">
             </div>
             <button class="submit">预测</button>
           </form>
           <div class="detail" v-show="showDetail">
             <div class="probability">
               <span class="detail_title">录取概率 ></span>
-              <span class="detail_subTitle spanActive">全部</span>
+              <span class="detail_subTitle" :class="subTitle=='all'?'spanActive':''" @click="subTitle='all'">全部</span>
+              <span class="detail_subTitle" :class="subTitle=='sprint'?'spanActive':''" @click="subTitle='sprint'">冲刺</span>
+              <span class="detail_subTitle" :class="subTitle=='reliable'?'spanActive':''" @click="subTitle='reliable'">稳妥</span>
+              <span class="detail_subTitle" :class="subTitle=='safe'?'spanActive':''" @click="subTitle='safe'">保底</span>
               <span class="detail_subTitle" @click="showRule=true">【推荐规则】</span>
               <div class="rule" v-if="showRule">
                 <p>1、本查询系统的信息仅供参考，具体数据请以学校官网或考试院公布为准。</p>
@@ -40,25 +43,22 @@
               </div>
             </div>
             <div class="probability">
-              <span class="detail_title">录取概率 ></span>
-              <span class="detail_subTitle spanActive">全部</span>
-              <span class="detail_subTitle">【推荐规则】</span>
-            </div>
-            <div class="probability">
-              <span class="detail_title">录取概率 ></span>
-              <span class="detail_subTitle spanActive">全部</span>
-              <span class="detail_subTitle">【推荐规则】</span>
-            </div>
-            <div class="probability">
-              <span class="detail_title">录取概率 ></span>
-              <span class="detail_subTitle spanActive">全部</span>
-              <span class="detail_subTitle">【推荐规则】</span>
+              <span class="detail_title">所属地区 ></span>
+              <span class="detail_subTitle" :class="site==''?'spanActive':''" @click="site=''">全部</span>
+              <span class="detail_subTitle" 
+                    v-for="(item, index) of allSite"
+                    :class="site==item?'spanActive':''" 
+                    @click="site=item"
+                    :key="index"
+              >
+              {{item}}
+              </span>
             </div>
           </div>
           <div class="close_detail" @click="show()">
             {{showCondition}}
           </div>
-          <select-school v-if="result" :site="site"></select-school>
+          <select-school v-if="result" :site="site" :subTitle="subTitle" :rank="rank" @nofound="result=''"></select-school>
           <no-found v-if="!result"></no-found>
         </div>
         <div class="message_right">
@@ -110,8 +110,19 @@ export default {
       page: 'score',
       showRule: false,
       tip: '高考分：550',
-      site: ''
+      site: '',
+      subTitle: 'all',
+      allSite: [],
+      rank: null
     }
+  },
+  watch: {
+    rank(){
+      this.result = '1'
+    }
+  },
+  mounted() {
+    this.getSite()
   },
   methods: {
     show(){
@@ -129,6 +140,11 @@ export default {
     changeRank(){
       this.page = 'rank'
       this.tip = '高考位次：10000'
+    },
+    getSite(){
+      this.axios.get('/school/findAllSite').then((res)=>{
+        this.allSite = res.data
+      }) 
     }
   }
 }

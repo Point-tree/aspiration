@@ -1,7 +1,7 @@
 <template>
   <div class="select_school">
     <div class="result_num">
-      <span>共匹配</span><span class="strong">{{baodi.length+wentuo.length+chongci.length}}</span><span>所学校，共</span><span class="strong">0</span><span>页</span>
+      <span>共匹配</span><span class="strong">{{safe.length+reliable.length+sprint.length}}</span><span>所学校，共</span><span class="strong">0</span><span>页</span>
     </div>
     <div class="result_table">
       <div class="table_title">
@@ -13,7 +13,7 @@
         <div class="some_major">部分开设专业</div>
         <div class="school_compoment">高校对比</div>
       </div>
-      <div class="table_msg" v-for="item1 of chongci" :key="item1.id" v-show="chongci">
+      <div class="table_msg" v-for="item1 of sprint" :key="item1.id" v-show="sprint">
         <div class="school_name">
           <img src="https://static-data.eol.cn/upload/logo/303.jpg" alt="广州体育学院">
           <span class="school">
@@ -36,7 +36,7 @@
           <span>+对比</span>
         </div>
       </div>
-      <div class="table_msg" v-for="item2 of wentuo" :key="item2.id" v-show="wentuo">
+      <div class="table_msg" v-for="item2 of reliable" :key="item2.id" v-show="reliable">
         <div class="school_name">
           <img src="https://static-data.eol.cn/upload/logo/303.jpg" alt="广州体育学院">
           <span class="school">
@@ -59,7 +59,7 @@
           <span>+对比</span>
         </div>
       </div>
-      <div class="table_msg" v-for="item3 of baodi" :key="item3.id" v-show="baodi">
+      <div class="table_msg" v-for="item3 of safe" :key="item3.id" v-show="safe">
         <div class="school_name">
           <img src="https://static-data.eol.cn/upload/logo/303.jpg" alt="广州体育学院">
           <span class="school">
@@ -89,30 +89,64 @@
 <script>
 export default {
   name: 'select-school',
+  props: {
+    subTitle: String,
+    site: String,
+    rank: Number
+  },
   data() {
     return{
       res: {},
-      baodi: [],
-      chongci: [],
-      wentuo: []
+      safe: [],
+      sprint: [],
+      reliable: []
     }
   },
   mounted () {
     this.getSchool();
   },
+  watch: {
+    subTitle(){
+      this.getSchool();
+    },
+    site(){
+      this.getSchool();
+    },
+    rank(){
+      this.getSchool();
+    }
+  },
   methods: {
     getSchool(){
-      this.axios.get('/Aspiration_war_exploded/school/predictSchoolAll',{
-        params: {
-          rank: 6000,
-          sort: '理科'
+      this.axios.get('/school/predictSchool',{
+         params: {
+          rank: this.rank || 6000,
+          sort: '理科',
+          site: this.site
         }
       }).then((res)=>{
         this.res = res.data
-        this.baodi = res.data.baodi
-        this.chongci = res.data.chongci
-        this.wentuo = res.data.wentuo
-      })  
+        if(this.subTitle == 'safe'){
+          this.sprint = []
+          this.reliable = []
+          this.safe = res.data.safe
+        }else if(this.subTitle == 'sprint'){
+          this.safe = []
+          this.reliable = []
+          this.sprint = res.data.sprint
+        }else if(this.subTitle == 'reliable'){
+          this.sprint = []
+          this.safe = []
+          this.reliable = res.data.reliable
+        }else{
+          this.safe = res.data.safe
+          this.sprint = res.data.sprint
+          this.reliable = res.data.reliable
+        }
+        if(this.safe==[]&&this.sprint==[]&&this.reliable==[]){
+          this.$emit('nofound','')
+        }
+      }) 
     }
   }
 }
