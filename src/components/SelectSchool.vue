@@ -6,11 +6,11 @@
     <div class="result_table">
       <div class="table_title">
         <div class="school_name">学校名称</div>
-        <div class="low_price">2017年最低分</div>
+        <div class="low_price">2019年最低分</div>
         <div class="admission_batch">录取批次</div>
         <div class="school_type">招生类型</div>
         <div class="admission_probability">录取概率</div>
-        <div class="some_major">部分开设专业</div>
+        <div class="some_major">2019年最低排位</div>
         <div class="school_compoment">高校对比</div>
       </div>
       <div class="table_msg" v-for="item1 of sprint" :key="item1.id" v-show="sprint">
@@ -25,13 +25,7 @@
         <div class="admission_batch">本科二批</div>
         <div class="school_type">普通类</div>
         <div class="admission_probability">冲刺</div>
-        <div class="some_major">
-          <ul>
-            <li>体育教育</li>
-            <li>运动人体科学</li>
-            <li>运动训练</li>
-          </ul>
-        </div>
+        <div class="some_major">{{item1.lowestrank}}</div>
         <div class="school_compoment">
           <span>+对比</span>
         </div>
@@ -48,13 +42,7 @@
         <div class="admission_batch">本科二批</div>
         <div class="school_type">普通类</div>
         <div class="admission_probability">稳妥</div>
-        <div class="some_major">
-          <ul>
-            <li>体育教育</li>
-            <li>运动人体科学</li>
-            <li>运动训练</li>
-          </ul>
-        </div>
+        <div class="some_major">{{item2.lowestrank}}</div>
         <div class="school_compoment">
           <span>+对比</span>
         </div>
@@ -71,13 +59,7 @@
         <div class="admission_batch">本科二批</div>
         <div class="school_type">普通类</div>
         <div class="admission_probability">保底</div>
-        <div class="some_major">
-          <ul>
-            <li>体育教育</li>
-            <li>运动人体科学</li>
-            <li>运动训练</li>
-          </ul>
-        </div>
+        <div class="some_major">{{item3.lowestrank}}</div>
         <div class="school_compoment">
           <span>+对比</span>
         </div>
@@ -103,7 +85,7 @@ export default {
     }
   },
   mounted () {
-    this.getSchool();
+    // this.getSchool();
   },
   watch: {
     subTitle(){
@@ -117,37 +99,41 @@ export default {
     }
   },
   methods: {
-    getSchool(){
-      this.axios.get('/school/predictSchool',{
-         params: {
-          rank: this.rank || 6000,
-          sort: '理科',
-          site: this.site
-        }
-      }).then((res)=>{
-        this.res = res.data
-        if(this.subTitle == 'safe'){
-          this.sprint = []
-          this.reliable = []
-          this.safe = res.data.safe
-        }else if(this.subTitle == 'sprint'){
-          this.safe = []
-          this.reliable = []
-          this.sprint = res.data.sprint
-        }else if(this.subTitle == 'reliable'){
-          this.sprint = []
-          this.safe = []
-          this.reliable = res.data.reliable
-        }else{
-          this.safe = res.data.safe
-          this.sprint = res.data.sprint
-          this.reliable = res.data.reliable
-        }
-        if(this.safe==[]&&this.sprint==[]&&this.reliable==[]){
-          this.$emit('nofound','')
-        }
-      }) 
-    }
+    // getSchool(){
+    //   this.axios.get('/school/predictSchool',{
+    //      params: {
+    //       rank: this.rank || 6000,
+    //       sort: '理科',
+    //       site: this.site
+    //     }
+    //   }).then((res)=>{
+    //     this.res = res.data
+    //     if(this.subTitle == 'safe'){
+    //       this.sprint = []
+    //       this.reliable = []
+    //       this.safe = res.data.safe
+    //       this.$emit('nofound','1')
+    //     }else if(this.subTitle == 'sprint'){
+    //       this.safe = []
+    //       this.reliable = []
+    //       this.sprint = res.data.sprint
+    //       this.$emit('nofound','1')
+    //     }else if(this.subTitle == 'reliable'){
+    //       this.sprint = []
+    //       this.safe = []
+    //       this.reliable = res.data.reliable
+    //       this.$emit('nofound','1')
+    //     }else{
+    //       this.safe = res.data.safe
+    //       this.sprint = res.data.sprint
+    //       this.reliable = res.data.reliable
+    //       this.$emit('nofound','1')
+    //     }
+    //     if(this.safe==[]&&this.sprint==[]&&this.reliable==[]){
+    //       this.$emit('nofound','')
+    //     }
+    //   }) 
+    // }
   }
 }
 </script>
@@ -249,16 +235,6 @@ export default {
       }
       .admission_probability{
         color: red;
-      }
-      .some_major{
-        padding-top: 20px;
-        li{
-          line-height: 21px;
-          cursor: pointer;
-          &:hover{
-            color: $themeColor;
-          }
-        }
       }
       .school_compoment{
         color: $themeColor;

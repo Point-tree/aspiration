@@ -7,8 +7,7 @@
           <form class="select">
             <div>
               <select class="select_address">
-                <option value ="广州">广州</option>
-                <option value ="广州">广州</option>
+                <option value ="广州">广东</option>
               </select>
             </div>
             <span>科类 ></span>
@@ -25,7 +24,7 @@
             <div class="select_scole">
               <input type="text" :placeholder="tip" v-model="rank">
             </div>
-            <button class="submit">预测</button>
+            <button class="submit" @click="subTitle='all';rank=''" >重置</button>
           </form>
           <div class="detail" v-show="showDetail">
             <div class="probability">
@@ -58,7 +57,7 @@
           <div class="close_detail" @click="show()">
             {{showCondition}}
           </div>
-          <select-school v-if="result" :site="site" :subTitle="subTitle" :rank="rank" @nofound="result=''"></select-school>
+          <select-school v-if="result" :site="site" :subTitle="subTitle" :rank="rank" @nofound="nofound()"></select-school>
           <no-found v-if="!result"></no-found>
         </div>
         <div class="message_right">
@@ -73,7 +72,20 @@
           </swiper>
           <div class="suggest_school">
             <div class="suggest_title">推荐高校</div>
-            <div class="school_name" v-for="(item, index) of schoolList" :key=index>上海海事大学</div>
+            <ul id="subject">
+              <li id="school_name" v-for="(item, index) of schoolList" :key=index>
+                上海海事大学
+                <div class="sub">
+                  <img src="https://static-data.eol.cn/upload/logo/303.jpg">
+                  <div class="sub_msg">
+                    <p>普通本科</p>
+                    <p>开设专业</p>
+                    <p>招生信息</p>
+                    <p>历年分数</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -103,7 +115,7 @@ export default {
           el: '.swiper-pagination'
         },
       },
-      result: '11',
+      result: '1',
       showDetail: true,
       showCondition: '关闭筛选条件',
       schoolList: [1,1,1,1,1,1,1,1,1],
@@ -116,13 +128,10 @@ export default {
       rank: null
     }
   },
-  watch: {
-    rank(){
-      this.result = '1'
-    }
-  },
   mounted() {
-    this.getSite()
+    // this.getSite();
+    window.addEventListener('scroll', this.menu);
+    this.initList();
   },
   methods: {
     show(){
@@ -141,10 +150,61 @@ export default {
       this.page = 'rank'
       this.tip = '高考位次：10000'
     },
-    getSite(){
-      this.axios.get('/school/findAllSite').then((res)=>{
-        this.allSite = res.data
-      }) 
+    // getSite(){
+    //   this.axios.get('/school/findAllSite').then((res)=>{
+    //     this.allSite = res.data
+    //   }) 
+    // },
+    // 滚动定位事件
+    menu() {
+      var scroll = document.documentElement.scrollTop || document.body.scrollTop;
+      var scrollBottom = document.documentElement.scrollHeight-330-document.documentElement.clientHeight || document.body.scrollHeight-330-document.body.clientHeight;
+      var suggest = document.querySelector('.suggest_school')
+      if(scroll >= 460 && scroll <= scrollBottom){
+        suggest.style.position = 'fixed'
+      }else{
+        suggest.style.position = 'relative'
+      }
+    },
+    // 找不到数据
+    nofound(i) {
+      this.result = i
+    },
+    // 事件绑定封装
+    bind(el, eventType, callback) {
+      if(typeof el.addEventListener === 'function'){
+          //标准事件绑定方法
+          el.addEventListener(eventType, callback, false);
+      }else if(typeof el.attechEvent === 'function'){
+          //IE事件绑定方法
+          el.attachEvent('on' + eventType, callback);
+      }
+    },
+    //鼠标悬停的处理函数
+    mouseoverHandler(e){
+      var target = e.target || e.srcElement;
+      var outer = document.getElementById('subject');
+      var list = outer.getElementsByTagName('li');
+      //清空所有LI元素的class
+      for(var i = 0; i < list.length; i++){
+          list[i].querySelector('.sub').style.display = 'none';
+      }
+      //根据事件的冒泡原理，找到需要变更class 的LI元素
+      while(target.tagName != 'LI' || target.tagName == 'BODY'){
+          target = target.parentNode;
+      }
+      target.querySelector('.sub').style.display = 'block';
+    },
+    //初始化手风琴样式
+    initList() {
+    //取得外部元素
+      var outer = document.getElementById('subject');
+      //取得每个列表项
+      var list = outer.getElementsByTagName('li');
+      for(var i =0; i < list.length; i++){
+          //对每个列表绑定鼠标悬停事件的监听
+        this.bind(list[i],'mouseover',this.mouseoverHandler);
+      }
     }
   }
 }
@@ -312,6 +372,8 @@ export default {
         position: relative;
         background: white;
         padding-left: 15px;
+        top: 0;
+        z-index: 10;
         .suggest_title{
           display: block;
           width: 100%;
@@ -322,13 +384,38 @@ export default {
           border-bottom: 1px dashed #eaeaea;
           margin-bottom: 12px;
         }
-        .school_name{
-          font-weight: bold;
-          line-height: 28px;
-          color: #333;
-          font-size: 14px;
-          border-bottom: 1px dashed #eaeaea;
-          padding: 3px 0;
+        #subject{
+          transition:all .1s linear;
+          #school_name{
+            font-weight: bold;
+            line-height: 28px;
+            color: #333;
+            font-size: 14px;
+            border-bottom: 1px dashed #eaeaea;
+            padding: 3px 0;
+            overflow:hidden;
+            .sub{
+              display: none;
+              img{
+                height: 78px;
+                width: 78px;
+                float: left;
+                margin-right: 20px;
+              }
+              .sub_msg{
+                text-align: center;
+                p{
+                  line-height: 22px;
+                  color: #666;
+                  font-weight: lighter;
+                  cursor: pointer;
+                  &:hover{
+                    color: $themeColor;
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
