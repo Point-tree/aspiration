@@ -57,7 +57,7 @@
           <div class="close_detail" @click="show()">
             {{showCondition}}
           </div>
-          <select-school v-if="result" :site="site" :subTitle="subTitle" :rank="rank" @nofound="nofound()"></select-school>
+          <select-school v-if="result" :site="site" :subTitle="subTitle" :rank="rank" ></select-school>
           <no-found v-if="!result"></no-found>
         </div>
         <div class="message_right">
@@ -74,9 +74,9 @@
             <div class="suggest_title">推荐高校</div>
             <ul id="subject">
               <li id="school_name" v-for="(item, index) of schoolList" :key=index>
-                上海海事大学
+                {{item.name}}
                 <div class="sub">
-                  <img src="https://static-data.eol.cn/upload/logo/303.jpg">
+                  <img :src=item.logo>
                   <div class="sub_msg">
                     <p>普通本科</p>
                     <p>开设专业</p>
@@ -118,7 +118,7 @@ export default {
       result: '1',
       showDetail: true,
       showCondition: '关闭筛选条件',
-      schoolList: [1,1,1,1,1,1,1,1,1],
+      schoolList: [],
       page: 'score',
       showRule: false,
       tip: '高考分：550',
@@ -129,9 +129,9 @@ export default {
     }
   },
   mounted() {
-    // this.getSite();
+    this.getSite();
+    this.getSuggest();
     window.addEventListener('scroll', this.menu);
-    this.initList();
   },
   methods: {
     show(){
@@ -150,11 +150,20 @@ export default {
       this.page = 'rank'
       this.tip = '高考位次：10000'
     },
-    // getSite(){
-    //   this.axios.get('/school/findAllSite').then((res)=>{
-    //     this.allSite = res.data
-    //   }) 
-    // },
+    // 获得筛选学校列表
+    getSite(){
+      this.axios.get('/school/findAllSite').then((res)=>{
+        this.allSite = res.data
+      }) 
+    },
+    // 获得推荐高校
+    getSuggest(){
+      this.axios.get('/school/recommandSchool').then((res)=>{
+        this.schoolList = res.data;
+      }).then(()=>{
+        this.initList();
+      })
+    },
     // 滚动定位事件
     menu() {
       var scroll = document.documentElement.scrollTop || document.body.scrollTop;
@@ -167,9 +176,9 @@ export default {
       }
     },
     // 找不到数据
-    nofound(i) {
-      this.result = i
-    },
+    // nofound(i) {
+    //   this.result = i
+    // },
     // 事件绑定封装
     bind(el, eventType, callback) {
       if(typeof el.addEventListener === 'function'){

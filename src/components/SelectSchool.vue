@@ -15,7 +15,7 @@
       </div>
       <div class="table_msg" v-for="item1 of sprint" :key="item1.id" v-show="sprint">
         <div class="school_name">
-          <img src="https://static-data.eol.cn/upload/logo/303.jpg" alt="广州体育学院">
+          <img :src=item1.logo :alt=item1.name>
           <span class="school">
             <span class="name">{{item1.name}}</span>
             <span class="type">体育类</span>
@@ -32,7 +32,7 @@
       </div>
       <div class="table_msg" v-for="item2 of reliable" :key="item2.id" v-show="reliable">
         <div class="school_name">
-          <img src="https://static-data.eol.cn/upload/logo/303.jpg" alt="广州体育学院">
+          <img :src=item2.logo :alt=item2.name>
           <span class="school">
             <span class="name">{{item2.name}}</span>
             <span class="type">体育类</span>
@@ -49,7 +49,7 @@
       </div>
       <div class="table_msg" v-for="item3 of safe" :key="item3.id" v-show="safe">
         <div class="school_name">
-          <img src="https://static-data.eol.cn/upload/logo/303.jpg" alt="广州体育学院">
+          <img :src=item3.logo :alt=item3.name>
           <span class="school">
             <span class="name">{{item3.name}}</span>
             <span class="type">体育类</span>
@@ -85,7 +85,7 @@ export default {
     }
   },
   mounted () {
-    // this.getSchool();
+    this.getSchool();
   },
   watch: {
     subTitle(){
@@ -99,41 +99,41 @@ export default {
     }
   },
   methods: {
-    // getSchool(){
-    //   this.axios.get('/school/predictSchool',{
-    //      params: {
-    //       rank: this.rank || 6000,
-    //       sort: '理科',
-    //       site: this.site
-    //     }
-    //   }).then((res)=>{
-    //     this.res = res.data
-    //     if(this.subTitle == 'safe'){
-    //       this.sprint = []
-    //       this.reliable = []
-    //       this.safe = res.data.safe
-    //       this.$emit('nofound','1')
-    //     }else if(this.subTitle == 'sprint'){
-    //       this.safe = []
-    //       this.reliable = []
-    //       this.sprint = res.data.sprint
-    //       this.$emit('nofound','1')
-    //     }else if(this.subTitle == 'reliable'){
-    //       this.sprint = []
-    //       this.safe = []
-    //       this.reliable = res.data.reliable
-    //       this.$emit('nofound','1')
-    //     }else{
-    //       this.safe = res.data.safe
-    //       this.sprint = res.data.sprint
-    //       this.reliable = res.data.reliable
-    //       this.$emit('nofound','1')
-    //     }
-    //     if(this.safe==[]&&this.sprint==[]&&this.reliable==[]){
-    //       this.$emit('nofound','')
-    //     }
-    //   }) 
-    // }
+    getSchool(){
+      this.axios.get('/school/predictSchool',{
+         params: {
+          rank: this.rank || 6000,
+          sort: '理科',
+          site: this.site
+        }
+      }).then((res)=>{
+        this.res = res.data
+        if(this.subTitle == 'safe'){
+          this.sprint = []
+          this.reliable = []
+          this.safe = res.data.safe
+          this.$emit('nofound','1')
+        }else if(this.subTitle == 'sprint'){
+          this.safe = []
+          this.reliable = []
+          this.sprint = res.data.sprint
+          this.$emit('nofound','1')
+        }else if(this.subTitle == 'reliable'){
+          this.sprint = []
+          this.safe = []
+          this.reliable = res.data.reliable
+          this.$emit('nofound','1')
+        }else{
+          this.safe = res.data.safe
+          this.sprint = res.data.sprint
+          this.reliable = res.data.reliable
+          this.$emit('nofound','1')
+        }
+        if(this.safe==[]&&this.sprint==[]&&this.reliable==[]){
+          this.$emit('nofound','')
+        }
+      }) 
+    }
   }
 }
 </script>

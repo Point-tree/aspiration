@@ -6,7 +6,7 @@
           <a href="javascript:;"><img src="https://img8.eol.cn/e_images/gk/2019/PC/3dbanner402.png"></a>
         </swiper-slide>
         <swiper-slide>
-          <a href="javascript:;"><img src="https://img3.eol.cn/e_images/gk/2019/PC/3dbanner302.png"></a>
+          <a href="javascript:;"><img src="https://img9.eol.cn/e_images/gk/2019/PC/3dbanner303.jpeg"></a>
         </swiper-slide>
         <swiper-slide>
           <a href="javascript:;"><img src="https://static-gkcx.eol.cn//upload/operate_img/gkcx_1588917923_2991_thumb.jpg"></a>
@@ -17,20 +17,20 @@
       <div class="detail">
         <div class="detail_item">
           <a href="javascript:;">双一流建设高校</a>
-          <a href="javascript:;">双一流建设高校</a>
-          <a href="javascript:;">双一流建设高校</a>
-          <a href="javascript:;">双一流建设高校</a>
-          <a href="javascript:;">双一流建设高校</a>
-          <a href="javascript:;">双一流建设高校</a>
-          <a href="javascript:;">双一流建设高校</a>
-          <a href="javascript:;">双一流建设高校</a>
-          <a href="javascript:;">双一流建设高校</a>
-          <a href="javascript:;">双一流建设高校</a>
-          <a href="javascript:;">双一流建设高校</a>
-          <a href="javascript:;">双一流建设高校</a>
-          <a href="javascript:;">双一流建设高校</a>
-          <a href="javascript:;">双一流建设高校</a>
-          <a href="javascript:;">双一流建设高校</a>
+          <a href="javascript:;">双一流建设学科</a>
+          <a href="javascript:;">985工程高校</a>
+          <a href="javascript:;">211工程高校</a>
+          <a href="javascript:;">国家重点学科</a>
+          <a href="javascript:;">特色专业</a>
+          <a href="javascript:;">历年高考分数线</a>
+          <a href="javascript:;">高招调查报告</a>
+          <a href="javascript:;">图解强基计划</a>
+          <a href="javascript:;">高考真题</a>
+          <a href="javascript:;">高考百科</a>
+          <a href="javascript:;">一分一段</a>
+          <a href="javascript:;">高职频道</a>
+          <a href="javascript:;">专业解读</a>
+          <a href="javascript:;">高考大纲</a>
         </div>
         <div class="deadline">
           <div class="deadline_title">高考倒计时</div>
@@ -48,52 +48,40 @@
           <div class="picture cursor"><img src="https://static-gkcx.eol.cn//upload/operate_img/gkcx_1595485860_3376_thumb.png" alt="高考招生咨询会"><p>2020高考招生咨询会，正在进行中</p></div>
           <div class="news">
             <div class="news_item cursor"><img src="https://static-gkcx.eol.cn//upload/operate_img/gkcx_1597906391_4422_thumb.jpg" alt="2020年高招办请回答"><span>2020年高招办请回答</span></div>
-            <div class="news_item cursor"><img src="https://static-gkcx.eol.cn//upload/operate_img/gkcx_1578913537_7659_thumb.jpg" alt="2020年高招办请回答"><span>2020年高招办请回答</span></div>
-            <div class="news_item cursor"><img src="https://static-gkcx.eol.cn//upload/operate_img/gkcx_1578913556_7898_thumb.jpg" alt="2020年高招办请回答"><span>2020年高招办请回答</span></div>
-            <div class="news_item cursor"><img src="https://static-gkcx.eol.cn//upload/operate_img/gkcx_1578913574_7558_thumb.jpg" alt="2020年高招办请回答"><span>2020年高招办请回答</span></div>
+            <div class="news_item cursor"><img src="https://static-gkcx.eol.cn//upload/operate_img/gkcx_1578913537_7659_thumb.jpg" alt="大学信息名单 ——全面掌握大学信息 助力金榜题名"><span>大学信息名单 ——全面掌握大学信息 助力金榜题名</span></div>
+            <div class="news_item cursor"><img src="https://static-gkcx.eol.cn//upload/operate_img/gkcx_1578913556_7898_thumb.jpg" alt="高考实用信息导航——一站式了解高考"><span>高考实用信息导航——一站式了解高考</span></div>
+            <div class="news_item cursor"><img src="https://static-gkcx.eol.cn//upload/operate_img/gkcx_1578913574_7558_thumb.jpg" alt="全国高校特色专业建设点名单"><span>全国高校特色专业建设点名单</span></div>
           </div>
           <div class="news_detail">
             <ul>
               <li>各地投档分数线</li>
-              <li>各地投档分数线</li>
-              <li>各地投档分数线</li>
-              <li>各地投档分数线</li>
-              <li>各地投档分数线</li>
-              <li>各地投档分数线</li>
-              <li>各地投档分数线</li>
-              <li>各地投档分数线</li>
-              <li>各地投档分数线</li>
-              <li>各地投档分数线</li>
+              <li>各地高考报名人数</li>
+              <li>重点高校官网导航</li>
+              <li>高职单招小百科</li>
+              <li>高考志愿填报指南</li>
+              <li>新高考，考生如何选科</li>
+              <li>高校自主招生全面详解</li>
+              <li>聚焦高考</li>
+              <li>数说高考</li>
+              <li>各省招生工作规定</li>
+              <li>2020年各地新高考选科要求</li>
+              <li>高考全知道</li>
             </ul>
           </div>
         </div>
       </div>
       <div class="school">
-        <div class="title"><div class="title_box"></div><div class="title_name">推荐院校</div><div class="change cursor"><img src="">换一批</div></div>
+        <div class="title"><div class="title_box"></div><div class="title_name">推荐院校</div><div class="change cursor" @click="getSuggest()"><img src="">换一批</div></div>
         <div class="school_detail">
-          <div class="school_box cursor">
-            <img src="https://img1.eol.cn/e_images/gk/2019/PC/school1701.jpg" alt="华东师范大学"><div class="school_name">华东师范大学</div>
-          </div>
-          <div class="school_box cursor">
-            <img src="https://img1.eol.cn/e_images/gk/2019/PC/school1801.jpg" alt="南京大学"><div class="school_name">南京大学</div>
-          </div>
-          <div class="school_box cursor">
-            <img src="https://img1.eol.cn/e_images/gk/2019/PC/school1901.jpg" alt="浙江大学"><div class="school_name">浙江大学</div>
-          </div>
-          <div class="school_box cursor">
-            <img src="https://img2.eol.cn/e_images/gk/2019/PC/school2001.jpg" alt="中国科学技术大学"><div class="school_name">中国科学技术大学</div>
-          </div>
-          <div class="school_box cursor">
-            <img src="https://img1.eol.cn/e_images/gk/2019/PC/school1701.jpg" alt="华东师范大学"><div class="school_name">华东师范大学</div>
-          </div>
-          <div class="school_box cursor">
-            <img src="https://img1.eol.cn/e_images/gk/2019/PC/school1801.jpg" alt="南京大学"><div class="school_name">南京大学</div>
-          </div>
-          <div class="school_box cursor">
-            <img src="https://img1.eol.cn/e_images/gk/2019/PC/school1901.jpg" alt="浙江大学"><div class="school_name">浙江大学</div>
-          </div>
-          <div class="school_box cursor">
-            <img src="https://img2.eol.cn/e_images/gk/2019/PC/school2001.jpg" alt="中国科学技术大学"><div class="school_name">中国科学技术大学</div>
+          <div 
+            class="school_box cursor"
+            v-for="(item, index) of schoolList"
+            :key="index"
+          >
+            <div class="img_box">
+              <img :src=item.picture :alt=item.name>
+            </div>
+            <div class="school_name">{{item.name}}</div>
           </div>
         </div>
       </div>
@@ -131,34 +119,34 @@
           <div class="title"><div class="title_box"></div><div class="title_name">院校热度</div><div class="school_type"><span class="cursor" :class="school_rank=='undergraduate'?'active':''" @click="school_rank='undergraduate'">本科</span><span class="cursor" :class="school_rank=='specialty'?'active':''" @click="school_rank='specialty'">专科</span></div></div>
           <div class="rank">
             <div class="school_rank">
-              <div class="school_num">1</div><div class="school_name cursor">厦门大学</div><div class="school_hot_num cursor">12345678</div>
+              <div class="school_num import">1</div><div class="school_name cursor">厦门大学</div><div class="school_hot_num cursor">12468798</div>
             </div>
             <div class="school_rank">
-              <div class="school_num">1</div><div class="school_name cursor">厦门大学</div><div class="school_hot_num cursor">12345678</div>
+              <div class="school_num import">2</div><div class="school_name cursor">四川大学</div><div class="school_hot_num cursor">12348768</div>
             </div>
             <div class="school_rank">
-              <div class="school_num">1</div><div class="school_name cursor">厦门大学</div><div class="school_hot_num cursor">12345678</div>
+              <div class="school_num import">3</div><div class="school_name cursor">武汉大学</div><div class="school_hot_num cursor">11846876</div>
             </div>
             <div class="school_rank">
-              <div class="school_num">1</div><div class="school_name cursor">厦门大学</div><div class="school_hot_num cursor">12345678</div>
+              <div class="school_num">4</div><div class="school_name cursor">北京大学</div><div class="school_hot_num cursor">10548673</div>
             </div>
             <div class="school_rank">
-              <div class="school_num">1</div><div class="school_name cursor">厦门大学</div><div class="school_hot_num cursor">12345678</div>
+              <div class="school_num">5</div><div class="school_name cursor">中山大学</div><div class="school_hot_num cursor">9468465</div>
             </div>
             <div class="school_rank">
-              <div class="school_num">1</div><div class="school_name cursor">厦门大学</div><div class="school_hot_num cursor">12345678</div>
+              <div class="school_num">6</div><div class="school_name cursor">清华大学</div><div class="school_hot_num cursor">9445433</div>
             </div>
             <div class="school_rank">
-              <div class="school_num">1</div><div class="school_name cursor">厦门大学</div><div class="school_hot_num cursor">12345678</div>
+              <div class="school_num">7</div><div class="school_name cursor">中南大学</div><div class="school_hot_num cursor">9446768</div>
             </div>
             <div class="school_rank">
-              <div class="school_num">1</div><div class="school_name cursor">厦门大学</div><div class="school_hot_num cursor">12345678</div>
+              <div class="school_num">8</div><div class="school_name cursor">西南大学</div><div class="school_hot_num cursor">8446746</div>
             </div>
             <div class="school_rank">
-              <div class="school_num">1</div><div class="school_name cursor">厦门大学</div><div class="school_hot_num cursor">12345678</div>
+              <div class="school_num">9</div><div class="school_name cursor">浙江大学</div><div class="school_hot_num cursor">8434876</div>
             </div>
             <div class="school_rank">
-              <div class="school_num">1</div><div class="school_name cursor">厦门大学</div><div class="school_hot_num cursor">12345678</div>
+              <div class="school_num">10</div><div class="school_name cursor">浙江大学</div><div class="school_hot_num cursor">7545346</div>
             </div>
           </div>
         </div>
@@ -191,7 +179,19 @@ export default {
           prevEl: '.swiper-button-prev',
         }
       },
-      school_rank: 'undergraduate'
+      school_rank: 'undergraduate',
+      schoolList: []
+    }
+  },
+  mounted(){
+    this.getSuggest();
+  },
+  methods: {
+    // 获得推荐高校
+    getSuggest(){
+      this.axios.get('/school/recommandSchool').then((res)=>{
+        this.schoolList = res.data;
+      })
     }
   }
 }
@@ -382,6 +382,7 @@ export default {
       flex-wrap: wrap;
       .school_box{
         margin-right: auto;
+        width: 285px;
         &:nth-child(4n){
           margin-right: 0;
         }
@@ -392,6 +393,14 @@ export default {
           text-align: center;
           &:hover{
             color: $themeColor;
+          }
+        }
+        .img_box{
+          width: 285px;
+          height: 179px;
+          img{
+            width: 285px;
+            height: 179px;
           }
         }
       }
@@ -490,10 +499,13 @@ export default {
             width: 20px;
             height: 20px;
             line-height: 20px;
-            background-color: #F0052B;
+            background-color: #cccccc;
             color: #fff;
             text-align: center;
             margin-right: 10px;
+          }
+          .import{
+            background-color: #F0052B;
           }
           .school_name{
             font-size: 14px;

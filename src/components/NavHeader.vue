@@ -11,28 +11,28 @@
           <div class="search_item" v-if="searchItem">
             <div class="item_title">热门搜索</div>
             <div class="item_item">
-              <div class="item_num" style="background-color: red">1</div><div class="item_name" style="color: red">厦门大学</div>
+              <div class="item_num" style="background-color: red">1</div><div class="item_name" style="color: red">广东财经大学</div>
             </div>
             <div class="item_item">
-              <div class="item_num" style="background-color: orange">1</div><div class="item_name" style="color: red">厦门大学</div>
+              <div class="item_num" style="background-color: orange">1</div><div class="item_name" style="color: red">清华大学</div>
             </div>
             <div class="item_item">
-              <div class="item_num" style="background-color: yellow">1</div><div class="item_name" style="color: red">厦门大学</div>
-            </div>
-            <div class="item_item">
-              <div class="item_num">1</div><div class="item_name">厦门大学</div>
+              <div class="item_num" style="background-color: yellow">1</div><div class="item_name" style="color: red">北京大学</div>
             </div>
             <div class="item_item">
               <div class="item_num">1</div><div class="item_name">厦门大学</div>
             </div>
             <div class="item_item">
-              <div class="item_num">1</div><div class="item_name">厦门大学</div>
+              <div class="item_num">1</div><div class="item_name">复旦大学</div>
             </div>
             <div class="item_item">
-              <div class="item_num">1</div><div class="item_name">厦门大学</div>
+              <div class="item_num">1</div><div class="item_name">广东医科大学</div>
             </div>
             <div class="item_item">
-              <div class="item_num">1</div><div class="item_name">厦门大学</div>
+              <div class="item_num">1</div><div class="item_name">中山大学</div>
+            </div>
+            <div class="item_item">
+              <div class="item_num">1</div><div class="item_name">广州大学</div>
             </div>
             <div class="item_item">
               <div class="item_num">1</div><div class="item_name">厦门大学</div>
