@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './pages/home'
 import Index from './pages/index'
 import signIntent from './pages/signIntent'
+import searchSchool from './pages/searchSchool'
 
 Vue.use(Router);
 
@@ -22,6 +23,11 @@ export default new Router({
           path: '/signIntent',
           name: 'signIntent',
           component: signIntent,
+        },
+        {
+          path: '/searchSchool',
+          name: 'searchSchool',
+          component: searchSchool,
         }
       ]
     }

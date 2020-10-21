@@ -5,8 +5,8 @@
         <div class="logo"></div>
         <div class="search">
           <div class="search_input">
-            <input type="text" placeholder="查学校、查专业、查咨询" @focus="searchItem=true" @blur="searchItem=false">
-            <button class="cursor">搜索</button>
+            <input type="text" placeholder="查学校、查专业、查咨询" @focus="searchItem=true" @blur="searchItem=false" v-model="schoolName">
+            <button class="cursor" @click="search()">搜索</button>
           </div>
           <div class="search_item" v-if="searchItem">
             <div class="item_title">热门搜索</div>
@@ -14,31 +14,31 @@
               <div class="item_num" style="background-color: red">1</div><div class="item_name" style="color: red">广东财经大学</div>
             </div>
             <div class="item_item">
-              <div class="item_num" style="background-color: orange">1</div><div class="item_name" style="color: red">清华大学</div>
+              <div class="item_num" style="background-color: orange">2</div><div class="item_name" style="color: red">清华大学</div>
             </div>
             <div class="item_item">
-              <div class="item_num" style="background-color: yellow">1</div><div class="item_name" style="color: red">北京大学</div>
+              <div class="item_num" style="background-color: yellow">3</div><div class="item_name" style="color: red">北京大学</div>
             </div>
             <div class="item_item">
-              <div class="item_num">1</div><div class="item_name">厦门大学</div>
+              <div class="item_num">4</div><div class="item_name">厦门大学</div>
             </div>
             <div class="item_item">
-              <div class="item_num">1</div><div class="item_name">复旦大学</div>
+              <div class="item_num">5</div><div class="item_name">复旦大学</div>
             </div>
             <div class="item_item">
-              <div class="item_num">1</div><div class="item_name">广东医科大学</div>
+              <div class="item_num">6</div><div class="item_name">广东医科大学</div>
             </div>
             <div class="item_item">
-              <div class="item_num">1</div><div class="item_name">中山大学</div>
+              <div class="item_num">7</div><div class="item_name">中山大学</div>
             </div>
             <div class="item_item">
-              <div class="item_num">1</div><div class="item_name">广州大学</div>
+              <div class="item_num">8</div><div class="item_name">广州大学</div>
             </div>
             <div class="item_item">
-              <div class="item_num">1</div><div class="item_name">厦门大学</div>
+              <div class="item_num">9</div><div class="item_name">厦门大学</div>
             </div>
             <div class="item_item">
-              <div class="item_num">1</div><div class="item_name">厦门大学</div>
+              <div class="item_num">10</div><div class="item_name">厦门大学</div>
             </div>
           </div>
         </div>
@@ -49,7 +49,7 @@
       <div class="header_nav">
         <div @click="index()" :class="active == 'index' ? 'active': ''">首页</div>
         <div @click="signIntent()" :class="active == 'signIntent' ? 'active': ''">填志愿</div>
-        <div>查学校</div>
+        <div @click="searchSchool()" :class="active == 'searchSchool' ? 'active': ''">查学校</div>
         <div>查专业</div>
         <div>院校分数线</div>
         <div>报考热度排名</div>
@@ -65,7 +65,8 @@ export default {
   data(){
     return {
       searchItem: false,
-      active: ''
+      active: '',
+      schoolName: ''
     }
   },
   methods: {
@@ -73,10 +74,18 @@ export default {
       this.$router.push('/index')
       this.active = 'index'
     },
-
     signIntent(){
       this.$router.push('/signIntent')
       this.active = 'signIntent'
+    },
+    searchSchool(){
+      this.$router.push('/searchSchool')
+      this.active = 'searchSchool'
+    },
+    search(){
+      this.$emit('searchSchool', this.schoolName)
+      this.searchSchool()
+      this.schoolName = ''
     }
   }
 }
@@ -151,7 +160,7 @@ export default {
             width: 20px;
             text-align: center;
             line-height: 20px;
-            background-color: #666666;
+            background-color: #999999;
             color: white;
             margin-right: 20px;
           }

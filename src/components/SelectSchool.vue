@@ -15,11 +15,8 @@
       </div>
       <div class="table_msg" v-for="item1 of sprint" :key="item1.id" v-show="sprint">
         <div class="school_name">
-          <img :src=item1.logo :alt=item1.name>
-          <span class="school">
-            <span class="name">{{item1.name}}</span>
-            <span class="type">体育类</span>
-          </span>
+          <img v-lazy="item1.logo" :alt="item1.name">
+          <span class="name">{{item1.name}}</span>
         </div>
         <div class="low_price"><div class="type">{{item1.sort}}</div><div class="score">{{item1.lowestmark}}</div></div>
         <div class="admission_batch">本科二批</div>
@@ -32,11 +29,8 @@
       </div>
       <div class="table_msg" v-for="item2 of reliable" :key="item2.id" v-show="reliable">
         <div class="school_name">
-          <img :src=item2.logo :alt=item2.name>
-          <span class="school">
-            <span class="name">{{item2.name}}</span>
-            <span class="type">体育类</span>
-          </span>
+          <img v-lazy="item2.logo" :alt="item2.name">
+          <span class="name">{{item2.name}}</span>
         </div>
         <div class="low_price"><div class="type">{{item2.sort}}</div><div class="score">{{item2.lowestmark}}</div></div>
         <div class="admission_batch">本科二批</div>
@@ -49,11 +43,8 @@
       </div>
       <div class="table_msg" v-for="item3 of safe" :key="item3.id" v-show="safe">
         <div class="school_name">
-          <img :src=item3.logo :alt=item3.name>
-          <span class="school">
-            <span class="name">{{item3.name}}</span>
-            <span class="type">体育类</span>
-          </span>
+          <img v-lazy="item3.logo" :alt="item3.name">
+          <span class="name">{{item3.name}}</span>
         </div>
         <div class="low_price"><div class="type">{{item3.sort}}</div><div class="score">{{item3.lowestmark}}</div></div>
         <div class="admission_batch">本科二批</div>
@@ -74,7 +65,8 @@ export default {
   props: {
     subTitle: String,
     site: String,
-    rank: Number
+    rank: Number,
+    select_type: String
   },
   data() {
     return{
@@ -103,7 +95,7 @@ export default {
       this.axios.get('/school/predictSchool',{
          params: {
           rank: this.rank || 6000,
-          sort: '理科',
+          sort: this.select_type,
           site: this.site
         }
       }).then((res)=>{
@@ -132,7 +124,10 @@ export default {
         if(this.safe==[]&&this.sprint==[]&&this.reliable==[]){
           this.$emit('nofound','')
         }
-      }) 
+      }).catch(function () {
+         this.$emit('nofound','')
+         console.log('11');
+      });
     }
   }
 }
@@ -173,19 +168,19 @@ export default {
         width: 300px;
       }
       .low_price{
-        width: 97px;
+        width: 120px;
       }
       .admission_batch{
-        width: 64px;
+        width: 80px;
       }
       .school_type{
-        width: 64px;
+        width: 80px;
       }
       .admission_probability{
-        width: 64px;
+        width: 80px;
       }
       .some_major{
-        width: 197px;
+        width: 140px;
       }
       .school_compoment{
         flex: 1;
@@ -201,26 +196,15 @@ export default {
       .school_name{
         display: flex;
         flex-direction: row;
+        justify-content: center;
         img{
           width: 100px;
           height: 100px;
           margin-right: 6px;
           margin-left: 16px;
         }
-        .school{
-          display: flex;
-          flex-direction: column;
-          text-align: left;
-          .name{
-            font-size: 16px;
-            line-height: 24px;
-            margin-top: 20px;
-          }
-          .type{
-            font-size: 14px;
-            line-height: 24px;
-            margin-top: 6px;
-          }
+        .name{
+          font-size: 16px;
         }
       }
       .low_price{

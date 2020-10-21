@@ -12,8 +12,8 @@
             </div>
             <span>科类 ></span>
             <div>
-              <input type="radio" name="type" value="理科" class="select_type" checked><span>理 科</span>
-              <input type="radio" name="type" value="文科" class="select_type"><span>文 科</span>
+              <input type="radio" name="type" value="理科" class="select_type" checked @click="select_type='理科'"><span>理 科</span>
+              <input type="radio" name="type" value="文科" class="select_type" @click="select_type='文科'"><span>文 科</span>
             </div>
             <div>
               <select  class="type">
@@ -57,7 +57,7 @@
           <div class="close_detail" @click="show()">
             {{showCondition}}
           </div>
-          <select-school v-if="result" :site="site" :subTitle="subTitle" :rank="rank" ></select-school>
+          <select-school v-if="result" :site="site" :subTitle="subTitle" :rank="rank" :select_type="select_type" ></select-school>
           <no-found v-if="!result"></no-found>
         </div>
         <div class="message_right">
@@ -125,7 +125,8 @@ export default {
       site: '',
       subTitle: 'all',
       allSite: [],
-      rank: null
+      rank: null,
+      select_type: '理科'
     }
   },
   mounted() {

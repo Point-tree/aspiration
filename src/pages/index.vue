@@ -3,7 +3,7 @@
     <div class="container">
       <swiper :options="swiperOption" class="swiper_img">
         <swiper-slide>
-          <a href="javascript:;"><img src="https://img8.eol.cn/e_images/gk/2019/PC/3dbanner402.png"></a>
+          <a href="javascript:;"><img src="https://img3.eol.cn/e_images/gk/2019/PC/3dbanner102.png"></a>
         </swiper-slide>
         <swiper-slide>
           <a href="javascript:;"><img src="https://img9.eol.cn/e_images/gk/2019/PC/3dbanner303.jpeg"></a>
@@ -45,12 +45,12 @@
       <div class="hotRecommon">
         <div class="title"><div class="title_box"></div><div class="title_name">热门推荐</div></div>
         <div class="recommon_body">
-          <div class="picture cursor"><img src="https://static-gkcx.eol.cn//upload/operate_img/gkcx_1595485860_3376_thumb.png" alt="高考招生咨询会"><p>2020高考招生咨询会，正在进行中</p></div>
+          <div class="picture cursor"><img v-lazy="'https://static-gkcx.eol.cn//upload/operate_img/gkcx_1595485860_3376_thumb.png'" alt="高考招生咨询会"><p>2020高考招生咨询会，正在进行中</p></div>
           <div class="news">
-            <div class="news_item cursor"><img src="https://static-gkcx.eol.cn//upload/operate_img/gkcx_1597906391_4422_thumb.jpg" alt="2020年高招办请回答"><span>2020年高招办请回答</span></div>
-            <div class="news_item cursor"><img src="https://static-gkcx.eol.cn//upload/operate_img/gkcx_1578913537_7659_thumb.jpg" alt="大学信息名单 ——全面掌握大学信息 助力金榜题名"><span>大学信息名单 ——全面掌握大学信息 助力金榜题名</span></div>
-            <div class="news_item cursor"><img src="https://static-gkcx.eol.cn//upload/operate_img/gkcx_1578913556_7898_thumb.jpg" alt="高考实用信息导航——一站式了解高考"><span>高考实用信息导航——一站式了解高考</span></div>
-            <div class="news_item cursor"><img src="https://static-gkcx.eol.cn//upload/operate_img/gkcx_1578913574_7558_thumb.jpg" alt="全国高校特色专业建设点名单"><span>全国高校特色专业建设点名单</span></div>
+            <div class="news_item cursor"><img v-lazy="'https://static-gkcx.eol.cn//upload/operate_img/gkcx_1597906391_4422_thumb.jpg'" alt="2020年高招办请回答"><span>2020年高招办请回答</span></div>
+            <div class="news_item cursor"><img v-lazy="'https://static-gkcx.eol.cn//upload/operate_img/gkcx_1578913537_7659_thumb.jpg'" alt="大学信息名单 ——全面掌握大学信息 助力金榜题名"><span>大学信息名单 ——全面掌握大学信息 助力金榜题名</span></div>
+            <div class="news_item cursor"><img v-lazy="'https://static-gkcx.eol.cn//upload/operate_img/gkcx_1578913556_7898_thumb.jpg'" alt="高考实用信息导航——一站式了解高考"><span>高考实用信息导航——一站式了解高考</span></div>
+            <div class="news_item cursor"><img v-lazy="'https://static-gkcx.eol.cn//upload/operate_img/gkcx_1578913574_7558_thumb.jpg'" alt="全国高校特色专业建设点名单"><span>全国高校特色专业建设点名单</span></div>
           </div>
           <div class="news_detail">
             <ul>
@@ -79,7 +79,7 @@
             :key="index"
           >
             <div class="img_box">
-              <img :src=item.picture :alt=item.name>
+              <img v-lazy="item.picture" :alt="item.name">
             </div>
             <div class="school_name">{{item.name}}</div>
           </div>
@@ -89,28 +89,35 @@
         <div class="professional">
           <div class="title"><div class="title_box"></div><div class="title_name">专业解读</div></div>
           <div class="professional_video cursor">
-            <div class="video_box">
-              <img src="https://img7.eol.cn/e_images/gk/2019/PC/special101.png" alt="船舶与海洋工程专业解读">
+            <div class="video_box" @click="showSlide='slideDown'">
+              <img v-lazy="'https://img7.eol.cn/e_images/gk/2019/PC/special101.png'" alt="船舶与海洋工程专业解读">
               <div class="video_name">船舶与海洋工程专业解读</div>
             </div>
-            <div class="video_box">
-              <img src="https://img5.eol.cn/e_images/gk/2019/PC/special201.png" alt="生态学专业解读">
+            <div class="video-box" v-show="showSlide">
+              <div class="overlay"></div>
+              <div class="video" :class="showSlide">
+                <span class="icon-close" @click="closeVideo"></span>
+                <video src="/imgs/video.mp4" muted autoplay controls="controls"></video>
+              </div>
+            </div>
+            <div class="video_box" @click="showSlide='slideDown'">
+              <img v-lazy="'https://img5.eol.cn/e_images/gk/2019/PC/special201.png'" alt="生态学专业解读">
               <div class="video_name">生态学专业解读</div>
             </div>
-            <div class="video_box">
-              <img src="https://img3.eol.cn/e_images/gk/2019/PC/special301.png" alt="计算机科学与技术专业解读">
+            <div class="video_box" @click="showSlide='slideDown'">
+              <img v-lazy="'https://img3.eol.cn/e_images/gk/2019/PC/special301.png'" alt="计算机科学与技术专业解读">
               <div class="video_name">计算机科学与技术专业解读</div>
             </div>
-            <div class="video_box">
-              <img src="https://img4.eol.cn/e_images/gk/2019/PC/special401.png" alt="建筑学专业解读">
+            <div class="video_box" @click="showSlide='slideDown'">
+              <img v-lazy="'https://img4.eol.cn/e_images/gk/2019/PC/special401.png'" alt="建筑学专业解读">
               <div class="video_name">建筑学专业解读</div>
             </div>
-            <div class="video_box">
-              <img src="https://img7.eol.cn/e_images/gk/2019/PC/special501.png" alt="护理学专业解读">
+            <div class="video_box" @click="showSlide='slideDown'">
+              <img v-lazy="'https://img7.eol.cn/e_images/gk/2019/PC/special501.png'" alt="护理学专业解读">
               <div class="video_name">护理学专业解读</div>
             </div>
-            <div class="video_box">
-              <img src="https://img8.eol.cn/e_images/gk/2019/PC/special601.png" alt="化学专业解读">
+            <div class="video_box" @click="showSlide='slideDown'">
+              <img v-lazy="'https://img8.eol.cn/e_images/gk/2019/PC/special601.png'" alt="化学专业解读">
               <div class="video_name">化学专业解读</div>
             </div>
           </div>
@@ -180,7 +187,8 @@ export default {
         }
       },
       school_rank: 'undergraduate',
-      schoolList: []
+      schoolList: [],
+      showSlide:''//控制动画效果
     }
   },
   mounted(){
@@ -192,6 +200,13 @@ export default {
       this.axios.get('/school/recommandSchool').then((res)=>{
         this.schoolList = res.data;
       })
+    },
+    // 关闭视频按钮
+    closeVideo(){
+      this.showSlide='slideUp';
+      setTimeout(()=>{
+        this.showSlide='';
+      },600)
     }
   }
 }
@@ -200,6 +215,7 @@ export default {
 <style lang="scss">
 @import './../assets/scss/bass.scss';
 @import './../assets/scss/config.scss';
+@import './../assets/scss/mixin.scss';
 .index{
   margin-top: 20px;
   .swiper-container {
@@ -446,6 +462,65 @@ export default {
             font-size: 16px;
             font-weight: 400;
             color: #333;
+          }
+        }
+        .video-box{
+          .overlay{
+            @include position(fixed);
+            background-color:#333333;
+            opacity:.4;
+            z-index:10;
+          }
+          @keyframes slideDown{
+            from{
+              top:-50%;
+              opacity:0;
+            }
+            to{
+              top:50%;
+              opacity:1;
+            }
+          }
+          @keyframes slideUp{
+            from{
+              top:50%;
+              opacity:1;
+            }
+            to{
+              top:-50%;
+              opacity:0;
+            }
+          }
+          .video{
+            position:fixed;
+            top:-50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+            z-index:10;
+            width:1000px;
+            height:536px;
+            opacity:1;
+            &.slideDown{
+              animation:slideDown .6s linear;
+              top:50%;
+            }
+            &.slideUp{
+              animation:slideUp .6s linear;
+            }
+            .icon-close{
+              position:absolute;
+              top:20px;
+              right:20px;
+              @include bgImg(20px,20px,'/imgs/icon-close.png');
+              cursor:pointer;
+              z-index:11;
+            }
+            video{
+              width:100%;
+              height:100%;
+              object-fit:cover;
+              outline:none;
+            }
           }
         }
       }
